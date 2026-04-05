@@ -2503,8 +2503,8 @@ function _setAuthBg() {
   if (!modal) return;
   var isMobile = window.innerWidth <= 768;
   var img = isMobile
-    ? 'https://i.postimg.cc/9f9gM67L/image-1774951424480.jpg'
-    : 'https://i.postimg.cc/HLr3Nfzj/image-1774951413722.jpg';
+    ? 'https://exoxpdobzomtygzngtsp.supabase.co/storage/v1/object/public/assets/image-1774951424480.jpg'
+    : 'https://exoxpdobzomtygzngtsp.supabase.co/storage/v1/object/public/assets/image-1774951413722.jpg';
   modal.style.backgroundImage = "url('" + img + "')";
 }
 window.addEventListener('resize', _setAuthBg);
@@ -2618,7 +2618,7 @@ window.addEventListener('load', async function() {
 
 <div id="landingPage" style="position:fixed;inset:0;z-index:99999;display:flex;align-items:center;justify-content:center;overflow:hidden;">
   <!-- Background image -->
-  <div id="landingBg" style="position:absolute;inset:0;background-image:url('https://i.postimg.cc/pdpSfPkd/image-1774790717458.jpg');background-size:cover;background-position:center top;background-repeat:no-repeat;transform:scale(1.04);transition:transform 8s ease-out;"></div>
+  <div id="landingBg" style="position:absolute;inset:0;background-image:url('https://exoxpdobzomtygzngtsp.supabase.co/storage/v1/object/public/assets/image-1774790717458.jpg');background-size:cover;background-position:center top;background-repeat:no-repeat;transform:scale(1.04);transition:transform 8s ease-out;"></div>
   <!-- Dark vignette overlay -->
   <div style="position:absolute;inset:0;background:radial-gradient(ellipse at center,rgba(0,0,0,0.1) 0%,rgba(0,0,0,0.55) 100%);"></div>
   <!-- Bottom gradient for readability -->
@@ -3668,7 +3668,7 @@ window.addEventListener('load', async function() {
     <!-- Galaxy Map: image composite + canvas overlay -->
     <div class="galaxy-map-container" style="position:relative;width:100%;border-radius:20px;overflow:hidden;background:#060a14;border:1px solid #1a2240;">
       <!-- Background galaxy image -->
-      <img id="galaxyBg" src="https://i.postimg.cc/RFSvyPBk/image-1775291824869.jpg"
+      <img id="galaxyBg" src="https://exoxpdobzomtygzngtsp.supabase.co/storage/v1/object/public/assets/image-1775291824869.jpg"
            style="width:100%;display:block;opacity:0.92;" 
            alt="galaxy background"
            onload="onGalaxyBgLoaded()"
@@ -4152,7 +4152,7 @@ window.addEventListener('load', async function() {
     <div style="background:var(--card);border:1px solid var(--border);border-radius:14px;padding:16px 18px;margin-bottom:20px;">
       <div style="font-weight:700;color:var(--text);font-size:15px;margin-bottom:12px;">🌌 星系掌握概览</div>
       <div style="position:relative;width:100%;border-radius:12px;overflow:hidden;">
-        <img src="https://i.postimg.cc/RFSvyPBk/image-1775291824869.jpg"
+        <img src="https://exoxpdobzomtygzngtsp.supabase.co/storage/v1/object/public/assets/image-1775291824869.jpg"
              style="width:100%;display:block;opacity:0.7;" alt="galaxy"
              onload="renderParentGalaxyMap(this)"/>
         <canvas id="parentGalaxyCanvas" style="position:absolute;top:0;left:0;cursor:default;z-index:5;"></canvas>
@@ -4523,15 +4523,15 @@ const MASTERED_THRESHOLD = 3;
 
 // ===== POS MASCOT IMAGES =====
 const POS_MASCOT_MAP = [
-  { keys: ['动词短语','名词短语','形容词短语','连词短语','短语'], url: 'https://i.postimg.cc/J0S78Rxx/image-duan-yu.jpg' },
-  { keys: ['动词'],    url: 'https://i.postimg.cc/3N3p5CLC/image-dong-ci.jpg' },
-  { keys: ['副词'],    url: 'https://i.postimg.cc/CKJF1GJq/image-fu-ci.jpg' },
-  { keys: ['介词'],    url: 'https://i.postimg.cc/Vs2bmwJ1/image-jie-ci.jpg' },
-  { keys: ['连词'],    url: 'https://i.postimg.cc/R0PN8xrZ/image-lian-ci.jpg' },
-  { keys: ['名词','专有名词'], url: 'https://i.postimg.cc/bYSs65m8/image-ming-ci.jpg' },
-  { keys: ['形容词'],  url: 'https://i.postimg.cc/cJJJfkvQ/image-xing-rong-ci.jpg' },
-  { keys: ['代词'],    url: 'https://i.postimg.cc/y6pyR2kB/image-dai-ci.jpg' },
-  { keys: ['感叹句','感叹词'], url: 'https://i.postimg.cc/x16mrzHp/image-gan-tan-ju.jpg' },
+  { keys: ['动词短语','名词短语','形容词短语','连词短语','短语'], url: 'https://exoxpdobzomtygzngtsp.supabase.co/storage/v1/object/public/assets/image-duan-yu.jpg' },
+  { keys: ['动词'],    url: 'https://exoxpdobzomtygzngtsp.supabase.co/storage/v1/object/public/assets/image-dong-ci.jpg' },
+  { keys: ['副词'],    url: 'https://exoxpdobzomtygzngtsp.supabase.co/storage/v1/object/public/assets/image-fu-ci.jpg' },
+  { keys: ['介词'],    url: 'https://exoxpdobzomtygzngtsp.supabase.co/storage/v1/object/public/assets/image-jie-ci.jpg' },
+  { keys: ['连词'],    url: 'https://exoxpdobzomtygzngtsp.supabase.co/storage/v1/object/public/assets/image-lian-ci.jpg' },
+  { keys: ['名词','专有名词'], url: 'https://exoxpdobzomtygzngtsp.supabase.co/storage/v1/object/public/assets/image-ming-ci.jpg' },
+  { keys: ['形容词'],  url: 'https://exoxpdobzomtygzngtsp.supabase.co/storage/v1/object/public/assets/image-xing-rong-ci.jpg' },
+  { keys: ['代词'],    url: 'https://exoxpdobzomtygzngtsp.supabase.co/storage/v1/object/public/assets/image-dai-ci.jpg' },
+  { keys: ['感叹句','感叹词'], url: 'https://exoxpdobzomtygzngtsp.supabase.co/storage/v1/object/public/assets/image-gan-tan-ju.jpg' },
 ];
 // Pre-cache all mascot images
 (function() {
@@ -10462,17 +10462,17 @@ function getStudyStreak() {
 // ---- EGG TYPES ----
 const EGG_TYPES = {
   ocean:   { name:'海洋蛋', emoji:'🌊', desc:'孵出神秘的海洋龙',   color1:'#0ea5e9', color2:'#bae6fd', monsterColor:'#0284c7',
-    imgs:{ egg:'https://i.postimg.cc/8CKbJF7p/image-hai-yang-dan.jpg', baby:'https://i.postimg.cc/VNGFrSJd/image-hai-yang-you-shou.jpg', fire:'https://i.postimg.cc/Zq7LB9W0/image-hai-yang-shou-pen-huopng.jpg', wings:'https://i.postimg.cc/8CKbJF7c/image-hai-yang-shou-chi-bang.jpg', adult:'https://i.postimg.cc/Jh6QDysy/image-hai-yang-shou-cheng-nianpng.jpg' }},
+    imgs:{ egg:'https://exoxpdobzomtygzngtsp.supabase.co/storage/v1/object/public/assets/image-hai-yang-dan.jpg', baby:'https://exoxpdobzomtygzngtsp.supabase.co/storage/v1/object/public/assets/image-hai-yang-you-shou.jpg', fire:'https://exoxpdobzomtygzngtsp.supabase.co/storage/v1/object/public/assets/image-hai-yang-shou-pen-huopng.jpg', wings:'https://exoxpdobzomtygzngtsp.supabase.co/storage/v1/object/public/assets/image-hai-yang-shou-chi-bang.jpg', adult:'https://exoxpdobzomtygzngtsp.supabase.co/storage/v1/object/public/assets/image-hai-yang-shou-cheng-nianpng.jpg' }},
   flame:   { name:'火山蛋', emoji:'🌋', desc:'孵出炽热的火山兽',   color1:'#ff6b35', color2:'#ffd700', monsterColor:'#ff4500',
-    imgs:{ egg:'https://i.postimg.cc/qMJgY1mm/image-huo-shan-dan.jpg', baby:'https://i.postimg.cc/HLyL5Rxs/image-huo-shan-you-shou.jpg', fire:'https://i.postimg.cc/1zHjW54b/image-huo-shan-shou-pen-huo.jpg', wings:'https://i.postimg.cc/YSbd6nsF/image-huo-shan-shou-chi-bang.jpg', adult:'https://i.postimg.cc/4djqc2Yf/image-huo-shan-shou-cheng-nian.jpg' }},
+    imgs:{ egg:'https://exoxpdobzomtygzngtsp.supabase.co/storage/v1/object/public/assets/image-huo-shan-dan.jpg', baby:'https://exoxpdobzomtygzngtsp.supabase.co/storage/v1/object/public/assets/image-huo-shan-you-shou.jpg', fire:'https://exoxpdobzomtygzngtsp.supabase.co/storage/v1/object/public/assets/image-huo-shan-shou-pen-huo.jpg', wings:'https://exoxpdobzomtygzngtsp.supabase.co/storage/v1/object/public/assets/image-huo-shan-shou-chi-bang.jpg', adult:'https://exoxpdobzomtygzngtsp.supabase.co/storage/v1/object/public/assets/image-huo-shan-shou-cheng-nian.jpg' }},
   forest:  { name:'森林蛋', emoji:'🌿', desc:'孵出翠绿的森林精灵', color1:'#22c55e', color2:'#86efac', monsterColor:'#16a34a',
-    imgs:{ egg:'https://i.postimg.cc/4dHFXvW4/image-sen-lin-dan.jpg', baby:'https://i.postimg.cc/sxp6hjdR/image-sen-lin-you-shou.jpg', fire:'https://i.postimg.cc/nV7w5ksg/image-sen-lin-shou-pen-huo.jpg', wings:'https://i.postimg.cc/MKSr8QVK/image-sen-lin-shou-chi-bang.jpg', adult:'https://i.postimg.cc/L84CJFxb/image-sen-lin-shou-cheng-nian.jpg' }},
+    imgs:{ egg:'https://exoxpdobzomtygzngtsp.supabase.co/storage/v1/object/public/assets/image-sen-lin-dan.jpg', baby:'https://exoxpdobzomtygzngtsp.supabase.co/storage/v1/object/public/assets/image-sen-lin-you-shou.jpg', fire:'https://exoxpdobzomtygzngtsp.supabase.co/storage/v1/object/public/assets/image-sen-lin-shou-pen-huo.jpg', wings:'https://exoxpdobzomtygzngtsp.supabase.co/storage/v1/object/public/assets/image-sen-lin-shou-chi-bang.jpg', adult:'https://exoxpdobzomtygzngtsp.supabase.co/storage/v1/object/public/assets/image-sen-lin-shou-cheng-nian.jpg' }},
   crystal: { name:'水晶蛋', emoji:'💎', desc:'孵出璀璨的水晶神兽', color1:'#67e8f9', color2:'#e0f2fe', monsterColor:'#0891b2',
-    imgs:{ egg:'https://i.postimg.cc/VLg4QHzd/image-shui-jing-dan.jpg', baby:'https://i.postimg.cc/hjmMkDGn/image-shui-jing-you-shoupng.jpg', fire:'https://i.postimg.cc/nhwkMjjC/image-shui-jing-shou-pen-huo.jpg', wings:'https://i.postimg.cc/YSGxFrQc/image-shui-jing-shou-chi-bang.jpg', adult:'https://i.postimg.cc/hGk1bk0B/image-shui-jing-shou-cheng-nian.jpg' }},
+    imgs:{ egg:'https://exoxpdobzomtygzngtsp.supabase.co/storage/v1/object/public/assets/image-shui-jing-dan.jpg', baby:'https://exoxpdobzomtygzngtsp.supabase.co/storage/v1/object/public/assets/image-shui-jing-you-shoupng.jpg', fire:'https://exoxpdobzomtygzngtsp.supabase.co/storage/v1/object/public/assets/image-shui-jing-shou-pen-huo.jpg', wings:'https://exoxpdobzomtygzngtsp.supabase.co/storage/v1/object/public/assets/image-shui-jing-shou-chi-bang.jpg', adult:'https://exoxpdobzomtygzngtsp.supabase.co/storage/v1/object/public/assets/image-shui-jing-shou-cheng-nian.jpg' }},
   dessert: { name:'甜点蛋', emoji:'🍰', desc:'孵出甜蜜的糖果兽',   color1:'#f9a8d4', color2:'#fce7f3', monsterColor:'#ec4899',
-    imgs:{ egg:'https://i.postimg.cc/cHfMDFD4/image-tian-dian-dan.jpg', baby:'https://i.postimg.cc/FsrgZg0j/image-tian-dian-you-shou.jpg', fire:'https://i.postimg.cc/T3hj8d78/image-tian-dian-shou-pen-huo.jpg', wings:'https://i.postimg.cc/SKMWsZpp/image-tian-dian-shou-chi-bang.jpg', adult:'https://i.postimg.cc/tTdWdYTc/image-tian-dian-shou-cheng-nian.jpg' }},
+    imgs:{ egg:'https://exoxpdobzomtygzngtsp.supabase.co/storage/v1/object/public/assets/image-tian-dian-dan.jpg', baby:'https://exoxpdobzomtygzngtsp.supabase.co/storage/v1/object/public/assets/image-tian-dian-you-shou.jpg', fire:'https://exoxpdobzomtygzngtsp.supabase.co/storage/v1/object/public/assets/image-tian-dian-shou-pen-huo.jpg', wings:'https://exoxpdobzomtygzngtsp.supabase.co/storage/v1/object/public/assets/image-tian-dian-shou-chi-bang.jpg', adult:'https://exoxpdobzomtygzngtsp.supabase.co/storage/v1/object/public/assets/image-tian-dian-shou-cheng-nian.jpg' }},
   galaxy:  { name:'银河蛋', emoji:'🌌', desc:'孵出神秘的宇宙龙',   color1:'#a78bfa', color2:'#e9d5ff', monsterColor:'#7c3aed',
-    imgs:{ egg:'https://i.postimg.cc/Pf41Pp0j/image-yin-he-dan.jpg', baby:'https://i.postimg.cc/SNxC8Qp7/image-yin-he-you-shou.jpg', fire:'https://i.postimg.cc/brNDQgW6/image-yin-he-shou-pen-huo.jpg', wings:'https://i.postimg.cc/dVzyz8ZZ/image-yin-he-shou-chi-bang.jpg', adult:'https://i.postimg.cc/43V9Zmpr/image-yin-he-shou-cheng-nian.jpg' }},
+    imgs:{ egg:'https://exoxpdobzomtygzngtsp.supabase.co/storage/v1/object/public/assets/image-yin-he-dan.jpg', baby:'https://exoxpdobzomtygzngtsp.supabase.co/storage/v1/object/public/assets/image-yin-he-you-shou.jpg', fire:'https://exoxpdobzomtygzngtsp.supabase.co/storage/v1/object/public/assets/image-yin-he-shou-pen-huo.jpg', wings:'https://exoxpdobzomtygzngtsp.supabase.co/storage/v1/object/public/assets/image-yin-he-shou-chi-bang.jpg', adult:'https://exoxpdobzomtygzngtsp.supabase.co/storage/v1/object/public/assets/image-yin-he-shou-cheng-nian.jpg' }},
 };
 
 // Image cache + loader
@@ -12191,74 +12191,74 @@ function showLanding() {
 
 // ===== SCENES MODULE =====
 var SCENE_IMAGES = [
-    "https://i.postimg.cc/JhqVtK1Y/image-1775101342260.jpg",
-    "https://i.postimg.cc/KYNS4QGv/image-1775101348767.jpg",
-    "https://i.postimg.cc/KYNS4QG1/image-1775101365990.jpg",
-    "https://i.postimg.cc/yNP4Wn1k/image-1775101926472.jpg",
-    "https://i.postimg.cc/63psZRqw/image-1775102432658.jpg",
-    "https://i.postimg.cc/XJYM5FqX/image-1775103698486.jpg",
-    "https://i.postimg.cc/Ssx098RC/image-1775103719006.jpg",
-    "https://i.postimg.cc/ZR5kN3n6/image-1775103728037.jpg",
-    "https://i.postimg.cc/tT406PJ3/image-1775103985287.jpg",
-    "https://i.postimg.cc/63jkf34C/image-1775103989693.jpg",
-    "https://i.postimg.cc/tTSKNTnD/image-1775103991926.jpg",
-    "https://i.postimg.cc/Jn6f5nHq/image-1775104281037.jpg",
-    "https://i.postimg.cc/507hS0Qn/image-1775109668018.jpg",
-    "https://i.postimg.cc/LXCc3XgG/image-1775109802249.jpg",
-    "https://i.postimg.cc/wvfCQvsd/image-1775109857606.jpg",
-    "https://i.postimg.cc/qRbPxRCT/image-1775109875723.jpg",
-    "https://i.postimg.cc/Kzq6DzgF/image-1775109892268.jpg",
-    "https://i.postimg.cc/J0s96LbV/image-1775109985447.jpg",
-    "https://i.postimg.cc/d3hzHY8w/image-1775110000292.jpg",
-    "https://i.postimg.cc/nrX6RJvF/image-1775110068179.jpg",
-    "https://i.postimg.cc/HnrfZgQk/image-1775110491766.jpg",
-    "https://i.postimg.cc/D0StjTqW/image-1775110666471.jpg",
-    "https://i.postimg.cc/mkKKK5wg/image-1775110783869.jpg",
-    "https://i.postimg.cc/D0RRRMgz/image-1775110811073.jpg",
-    "https://i.postimg.cc/WzxxxHn3/image-1775110839599.jpg",
-    "https://i.postimg.cc/KjCCCHNT/image-1775111068976.jpg",
-    "https://i.postimg.cc/qqWWW5Lc/image-1775111131693.jpg",
-    "https://i.postimg.cc/7hjjjWVM/image-1775111134974.jpg",
-    "https://i.postimg.cc/d3gggxB4/image-1775111236520.jpg",
-    "https://i.postimg.cc/VsTySJ8Q/image-1775111402151.jpg",
-    "https://i.postimg.cc/L47dqJp2/image-1775111412850.jpg",
-    "https://i.postimg.cc/pV7N9mHX/image-1775112503066.jpg",
-    "https://i.postimg.cc/T2S8yK6h/image-1775112828023.jpg",
-    "https://i.postimg.cc/T2S8yK6j/image-1775112868653.jpg",
-    "https://i.postimg.cc/MZ4kcnSb/image-1775112948135.jpg",
-    "https://i.postimg.cc/xTbwL9fk/image-1775113129203.jpg",
-    "https://i.postimg.cc/Dyb917v4/image-1775114690447.jpg",
-    "https://i.postimg.cc/zXRsTqzw/image-1775114701303.jpg",
-    "https://i.postimg.cc/SNzBcmS7/image-1775114714118.jpg",
-    "https://i.postimg.cc/c48pfdxX/image-1775114822747.jpg",
-    "https://i.postimg.cc/02JT79kV/image-1775115511303.jpg",
-    "https://i.postimg.cc/fRn6K1yr/image-1775115634331.jpg",
-    "https://i.postimg.cc/Bn9dgRbz/image-1775115739002.jpg",
-    "https://i.postimg.cc/wj8SVnMS/image-1775117617569.jpg",
-    "https://i.postimg.cc/13hLHbXb/image-1775117634613.jpg",
-    "https://i.postimg.cc/qvsWZQC1/image-1775117670830.jpg",
-    "https://i.postimg.cc/W4sxRrM9/image-1775118759824.jpg",
-    "https://i.postimg.cc/CKw9yDjc/image-1775118780946.jpg",
-    "https://i.postimg.cc/mrTKxMQ0/image-1775118823727.jpg",
-    "https://i.postimg.cc/43wqXdPT/image-1775119247197.jpg",
-    "https://i.postimg.cc/tgDw9TkC/image-1775119257836.jpg",
-    "https://i.postimg.cc/LsvwmXD8/image-1775119884657.jpg",
-    "https://i.postimg.cc/k5wz74sG/image-1775119908161.jpg",
-    "https://i.postimg.cc/hGM6Kjsz/image-1775120203628.jpg",
-    "https://i.postimg.cc/vmXkGBhn/image-1775120506471.jpg",
-    "https://i.postimg.cc/5tpTf0gv/image-1775120511082.jpg",
-    "https://i.postimg.cc/HxxKngvx/image-1775120520453.jpg",
-    "https://i.postimg.cc/FRRqz4Cz/image-1775121048883.jpg",
-    "https://i.postimg.cc/NMMVFcC9/image-1775121171698.jpg",
-    "https://i.postimg.cc/DZZD0TpG/image-1775122303241.jpg",
-    "https://i.postimg.cc/V66Tv8ZX/image-1775122578832.jpg",
-    "https://i.postimg.cc/j5592b3h/image-1775122582608.jpg",
-    "https://i.postimg.cc/k44ZGmYT/image-1775123038632.jpg",
-    "https://i.postimg.cc/NMznrzZ4/image-1775123389844.jpg",
-    "https://i.postimg.cc/FRB6JBwW/image-1775123401657.jpg",
-    "https://i.postimg.cc/1tjdNjbJ/image-1775123493650.jpg",
-    "https://i.postimg.cc/Kj3H7522/image-1775123506943.jpg",
-    "https://i.postimg.cc/kGRpNym5/image-1775123530501.jpg"
+    "https://exoxpdobzomtygzngtsp.supabase.co/storage/v1/object/public/assets/image-1775101342260.jpg",
+    "https://exoxpdobzomtygzngtsp.supabase.co/storage/v1/object/public/assets/image-1775101348767.jpg",
+    "https://exoxpdobzomtygzngtsp.supabase.co/storage/v1/object/public/assets/image-1775101365990.jpg",
+    "https://exoxpdobzomtygzngtsp.supabase.co/storage/v1/object/public/assets/image-1775101926472.jpg",
+    "https://exoxpdobzomtygzngtsp.supabase.co/storage/v1/object/public/assets/image-1775102432658.jpg",
+    "https://exoxpdobzomtygzngtsp.supabase.co/storage/v1/object/public/assets/image-1775103698486.jpg",
+    "https://exoxpdobzomtygzngtsp.supabase.co/storage/v1/object/public/assets/image-1775103719006.jpg",
+    "https://exoxpdobzomtygzngtsp.supabase.co/storage/v1/object/public/assets/image-1775103728037.jpg",
+    "https://exoxpdobzomtygzngtsp.supabase.co/storage/v1/object/public/assets/image-1775103985287.jpg",
+    "https://exoxpdobzomtygzngtsp.supabase.co/storage/v1/object/public/assets/image-1775103989693.jpg",
+    "https://exoxpdobzomtygzngtsp.supabase.co/storage/v1/object/public/assets/image-1775103991926.jpg",
+    "https://exoxpdobzomtygzngtsp.supabase.co/storage/v1/object/public/assets/image-1775104281037.jpg",
+    "https://exoxpdobzomtygzngtsp.supabase.co/storage/v1/object/public/assets/image-1775109668018.jpg",
+    "https://exoxpdobzomtygzngtsp.supabase.co/storage/v1/object/public/assets/image-1775109802249.jpg",
+    "https://exoxpdobzomtygzngtsp.supabase.co/storage/v1/object/public/assets/image-1775109857606.jpg",
+    "https://exoxpdobzomtygzngtsp.supabase.co/storage/v1/object/public/assets/image-1775109875723.jpg",
+    "https://exoxpdobzomtygzngtsp.supabase.co/storage/v1/object/public/assets/image-1775109892268.jpg",
+    "https://exoxpdobzomtygzngtsp.supabase.co/storage/v1/object/public/assets/image-1775109985447.jpg",
+    "https://exoxpdobzomtygzngtsp.supabase.co/storage/v1/object/public/assets/image-1775110000292.jpg",
+    "https://exoxpdobzomtygzngtsp.supabase.co/storage/v1/object/public/assets/image-1775110068179.jpg",
+    "https://exoxpdobzomtygzngtsp.supabase.co/storage/v1/object/public/assets/image-1775110491766.jpg",
+    "https://exoxpdobzomtygzngtsp.supabase.co/storage/v1/object/public/assets/image-1775110666471.jpg",
+    "https://exoxpdobzomtygzngtsp.supabase.co/storage/v1/object/public/assets/image-1775110783869.jpg",
+    "https://exoxpdobzomtygzngtsp.supabase.co/storage/v1/object/public/assets/image-1775110811073.jpg",
+    "https://exoxpdobzomtygzngtsp.supabase.co/storage/v1/object/public/assets/image-1775110839599.jpg",
+    "https://exoxpdobzomtygzngtsp.supabase.co/storage/v1/object/public/assets/image-1775111068976.jpg",
+    "https://exoxpdobzomtygzngtsp.supabase.co/storage/v1/object/public/assets/image-1775111131693.jpg",
+    "https://exoxpdobzomtygzngtsp.supabase.co/storage/v1/object/public/assets/image-1775111134974.jpg",
+    "https://exoxpdobzomtygzngtsp.supabase.co/storage/v1/object/public/assets/image-1775111236520.jpg",
+    "https://exoxpdobzomtygzngtsp.supabase.co/storage/v1/object/public/assets/image-1775111402151.jpg",
+    "https://exoxpdobzomtygzngtsp.supabase.co/storage/v1/object/public/assets/image-1775111412850.jpg",
+    "https://exoxpdobzomtygzngtsp.supabase.co/storage/v1/object/public/assets/image-1775112503066.jpg",
+    "https://exoxpdobzomtygzngtsp.supabase.co/storage/v1/object/public/assets/image-1775112828023.jpg",
+    "https://exoxpdobzomtygzngtsp.supabase.co/storage/v1/object/public/assets/image-1775112868653.jpg",
+    "https://exoxpdobzomtygzngtsp.supabase.co/storage/v1/object/public/assets/image-1775112948135.jpg",
+    "https://exoxpdobzomtygzngtsp.supabase.co/storage/v1/object/public/assets/image-1775113129203.jpg",
+    "https://exoxpdobzomtygzngtsp.supabase.co/storage/v1/object/public/assets/image-1775114690447.jpg",
+    "https://exoxpdobzomtygzngtsp.supabase.co/storage/v1/object/public/assets/image-1775114701303.jpg",
+    "https://exoxpdobzomtygzngtsp.supabase.co/storage/v1/object/public/assets/image-1775114714118.jpg",
+    "https://exoxpdobzomtygzngtsp.supabase.co/storage/v1/object/public/assets/image-1775114822747.jpg",
+    "https://exoxpdobzomtygzngtsp.supabase.co/storage/v1/object/public/assets/image-1775115511303.jpg",
+    "https://exoxpdobzomtygzngtsp.supabase.co/storage/v1/object/public/assets/image-1775115634331.jpg",
+    "https://exoxpdobzomtygzngtsp.supabase.co/storage/v1/object/public/assets/image-1775115739002.jpg",
+    "https://exoxpdobzomtygzngtsp.supabase.co/storage/v1/object/public/assets/image-1775117617569.jpg",
+    "https://exoxpdobzomtygzngtsp.supabase.co/storage/v1/object/public/assets/image-1775117634613.jpg",
+    "https://exoxpdobzomtygzngtsp.supabase.co/storage/v1/object/public/assets/image-1775117670830.jpg",
+    "https://exoxpdobzomtygzngtsp.supabase.co/storage/v1/object/public/assets/image-1775118759824.jpg",
+    "https://exoxpdobzomtygzngtsp.supabase.co/storage/v1/object/public/assets/image-1775118780946.jpg",
+    "https://exoxpdobzomtygzngtsp.supabase.co/storage/v1/object/public/assets/image-1775118823727.jpg",
+    "https://exoxpdobzomtygzngtsp.supabase.co/storage/v1/object/public/assets/image-1775119247197.jpg",
+    "https://exoxpdobzomtygzngtsp.supabase.co/storage/v1/object/public/assets/image-1775119257836.jpg",
+    "https://exoxpdobzomtygzngtsp.supabase.co/storage/v1/object/public/assets/image-1775119884657.jpg",
+    "https://exoxpdobzomtygzngtsp.supabase.co/storage/v1/object/public/assets/image-1775119908161.jpg",
+    "https://exoxpdobzomtygzngtsp.supabase.co/storage/v1/object/public/assets/image-1775120203628.jpg",
+    "https://exoxpdobzomtygzngtsp.supabase.co/storage/v1/object/public/assets/image-1775120506471.jpg",
+    "https://exoxpdobzomtygzngtsp.supabase.co/storage/v1/object/public/assets/image-1775120511082.jpg",
+    "https://exoxpdobzomtygzngtsp.supabase.co/storage/v1/object/public/assets/image-1775120520453.jpg",
+    "https://exoxpdobzomtygzngtsp.supabase.co/storage/v1/object/public/assets/image-1775121048883.jpg",
+    "https://exoxpdobzomtygzngtsp.supabase.co/storage/v1/object/public/assets/image-1775121171698.jpg",
+    "https://exoxpdobzomtygzngtsp.supabase.co/storage/v1/object/public/assets/image-1775122303241.jpg",
+    "https://exoxpdobzomtygzngtsp.supabase.co/storage/v1/object/public/assets/image-1775122578832.jpg",
+    "https://exoxpdobzomtygzngtsp.supabase.co/storage/v1/object/public/assets/image-1775122582608.jpg",
+    "https://exoxpdobzomtygzngtsp.supabase.co/storage/v1/object/public/assets/image-1775123038632.jpg",
+    "https://exoxpdobzomtygzngtsp.supabase.co/storage/v1/object/public/assets/image-1775123389844.jpg",
+    "https://exoxpdobzomtygzngtsp.supabase.co/storage/v1/object/public/assets/image-1775123401657.jpg",
+    "https://exoxpdobzomtygzngtsp.supabase.co/storage/v1/object/public/assets/image-1775123493650.jpg",
+    "https://exoxpdobzomtygzngtsp.supabase.co/storage/v1/object/public/assets/image-1775123506943.jpg",
+    "https://exoxpdobzomtygzngtsp.supabase.co/storage/v1/object/public/assets/image-1775123530501.jpg"
 ];
 var _scenesVip = false;
 var _scenesRendered = false;
@@ -13168,12 +13168,12 @@ window.addEventListener('resize', function() {
 // Planet images matched to guardian types by color:
 // 森林(绿) → custom, 水晶/地球 → ket, 银河(紫) → yle, 海洋(蓝) → pet, 火山(红) → academic
 var PLANET_IMGS = {
-  custom:   'https://i.postimg.cc/SsvHdVNr/image-1775291911821.jpg',  // 绿色森林星球
-  ket:      'https://i.postimg.cc/bJB4gLND/image-1775291834118.jpg',  // 地球型
-  yle:      'https://i.postimg.cc/rmP7jgFr/image-1775291838052.jpg',  // 紫色银河
-  pet:      'https://i.postimg.cc/0QBhnZ27/image-1775291842968.jpg',  // 蓝色海洋
-  academic: 'https://i.postimg.cc/B6VRpNQH/image-1775291846402.jpg',  // 火红火山
-  bonus:    'https://i.postimg.cc/d1xg6nts/image-1775291830135.jpg',  // 橙红备用
+  custom:   'https://exoxpdobzomtygzngtsp.supabase.co/storage/v1/object/public/assets/image-1775291911821.jpg',  // 绿色森林星球
+  ket:      'https://exoxpdobzomtygzngtsp.supabase.co/storage/v1/object/public/assets/image-1775291834118.jpg',  // 地球型
+  yle:      'https://exoxpdobzomtygzngtsp.supabase.co/storage/v1/object/public/assets/image-1775291838052.jpg',  // 紫色银河
+  pet:      'https://exoxpdobzomtygzngtsp.supabase.co/storage/v1/object/public/assets/image-1775291842968.jpg',  // 蓝色海洋
+  academic: 'https://exoxpdobzomtygzngtsp.supabase.co/storage/v1/object/public/assets/image-1775291846402.jpg',  // 火红火山
+  bonus:    'https://exoxpdobzomtygzngtsp.supabase.co/storage/v1/object/public/assets/image-1775291830135.jpg',  // 橙红备用
 };
 var _planetImgCache = {};
 function getPlanetImg(key) {
