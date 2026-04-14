@@ -8114,10 +8114,13 @@ async function showDone() {
       return !p.nextReview || p.nextReview <= now2;
     }).map(w => w.word || '').filter(Boolean);
     setTimeout(() => {
+      // Close done screen first, then show conversation invite
+      const ds = document.getElementById('doneScreen');
+      if (ds) { ds.style.display = 'none'; ds.style.cssText = 'display:none;'; }
       if (typeof maybeShowConversationInvite === 'function') {
         maybeShowConversationInvite(bk, todayWords, dueWords);
       }
-    }, 1500);
+    }, 2000);
   }
 }
 
