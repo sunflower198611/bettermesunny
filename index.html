@@ -2081,21 +2081,20 @@ async function doSignOut() {
   .book-award { font-size:10px; color:var(--accent3); font-weight:600; margin-bottom:6px; }
 
   /* ===== DONE SCREEN ===== */
-  .done-icon { font-size: 64px; margin-bottom: 20px; }
+  .done-icon { font-size: 52px; margin-bottom: 16px; }
   .done-title {
-    font-family: 'Playfair Display', serif;
-    font-size: 32px;
-    font-weight: 900;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 22px;
+    font-weight: 700;
     color: var(--text);
-    margin-bottom: 12px;
+    margin-bottom: 10px;
   }
   .done-subtitle {
-    font-size: 15px;
+    font-size: 13px;
     color: var(--muted);
-    margin-bottom: 40px;
+    margin-bottom: 0;
     line-height: 1.7;
   }
-  .done-actions { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
 
   /* ===== SCENE VOCAB TAB ===== */
   .scenes-wrap {
@@ -4279,13 +4278,26 @@ window.addEventListener('load', async function() {
 
 <!-- SESSION COMPLETE SCREEN -->
 <div id="doneScreen" style="display:none;">
-  <div style="background:var(--card);border:1px solid var(--border);border-radius:20px;padding:48px 40px;text-align:center;max-width:420px;width:90%;box-shadow:0 24px 64px rgba(0,0,0,0.5);">
+  <div style="background:var(--card);border:1px solid var(--border);border-radius:20px;
+    padding:40px 32px;width:340px;max-width:90vw;text-align:center;
+    box-shadow:0 24px 64px rgba(0,0,0,0.5);flex-shrink:0;">
     <div class="done-icon">🎉</div>
     <div class="done-title" id="doneTitle">本轮完成！</div>
     <div class="done-subtitle" id="doneSubtitle"></div>
-    <div class="done-actions">
-      <button class="nav-btn flip-btn" onclick="continueSession()" id="continueBtn">继续复习未掌握词</button>
-      <button class="nav-btn" onclick="dismissDone()">返回主页</button>
+    <div style="display:flex;flex-direction:column;gap:10px;margin-top:24px;">
+      <button class="nav-btn flip-btn" id="continueBtn" onclick="continueSession()" style="
+        width:100%;padding:12px;border-radius:10px;border:none;
+        background:var(--accent2);color:#fff;cursor:pointer;
+        font-size:14px;font-weight:700;font-family:inherit;
+        box-shadow:0 4px 16px rgba(167,139,250,0.3);transition:all 0.2s;"
+        onmouseover="this.style.transform='translateY(-1px)'"
+        onmouseout="this.style.transform=''">继续复习未掌握词</button>
+      <button onclick="dismissDone()" style="
+        width:100%;padding:10px;border-radius:10px;border:1px solid var(--border);
+        background:transparent;color:var(--muted);cursor:pointer;font-size:13px;
+        font-family:inherit;transition:all 0.2s;"
+        onmouseover="this.style.color='var(--text)'"
+        onmouseout="this.style.color='var(--muted)'">返回主页</button>
     </div>
   </div>
 </div>
@@ -8099,9 +8111,9 @@ async function showDone() {
 
   // Show as full-screen centered modal overlay
   const doneScreen = document.getElementById('doneScreen');
-  doneScreen.style.cssText = 'display:flex;position:fixed;inset:0;z-index:500;background:rgba(10,12,18,0.88);backdrop-filter:blur(6px);align-items:center;justify-content:center;flex-direction:column;';
+  doneScreen.style.cssText = 'display:flex;position:fixed;inset:0;z-index:500;background:rgba(10,12,18,0.88);backdrop-filter:blur(6px);align-items:center;justify-content:center;flex-direction:row;gap:24px;padding:24px;flex-wrap:wrap;';
 
-  // ── Trigger AI conversation invite after 1.5s ──────────────────────
+  // ── Show conversation invite alongside done screen after 1s ──────────────────────
   if (sessionMode !== 'vault') {
     const bk = currentBank || 'ort';
     const todayWords = [...new Set(sessionQueue.map(w => w.word || '').filter(Boolean))];
@@ -8114,13 +8126,10 @@ async function showDone() {
       return !p.nextReview || p.nextReview <= now2;
     }).map(w => w.word || '').filter(Boolean);
     setTimeout(() => {
-      // Close done screen first, then show conversation invite
-      const ds = document.getElementById('doneScreen');
-      if (ds) { ds.style.display = 'none'; ds.style.cssText = 'display:none;'; }
       if (typeof maybeShowConversationInvite === 'function') {
-        maybeShowConversationInvite(bk, todayWords, dueWords);
+        maybeShowConversationInvite(bk, todayWords, dueWords, true); // true = inline mode
       }
-    }, 2000);
+    }, 800);
   }
 }
 
@@ -19681,37 +19690,37 @@ function maybeShowGalaxyRules() {
 ════════════════════════════════════════════════════════════════════════ -->
 
 <!-- 1. POST-STUDY INVITE OVERLAY -->
-<div id="convInviteOverlay" style="display:none;position:fixed;inset:0;z-index:600;
-  background:rgba(10,12,18,0.85);backdrop-filter:blur(8px);
-  align-items:center;justify-content:center;">
-  <div style="background:var(--surface);border:1px solid var(--border);border-radius:20px;
-    padding:40px 36px;max-width:420px;width:90%;text-align:center;
-    box-shadow:0 24px 64px rgba(0,0,0,0.5);">
-    <div style="font-size:48px;margin-bottom:16px;">💬</div>
-    <div style="font-size:20px;font-weight:700;margin-bottom:8px;">来练习口语吧！</div>
-    <div style="font-size:14px;color:var(--muted);margin-bottom:6px;">
-      今天的主题：<strong style="color:var(--accent)" id="convInviteTopic">动物 Animals</strong>
+<div id="convInviteOverlay" style="display:none;">
+  <div style="background:var(--card);border:1px solid rgba(110,231,183,0.3);border-radius:20px;
+    padding:40px 32px;width:340px;max-width:90vw;text-align:center;
+    box-shadow:0 24px 64px rgba(110,231,183,0.08);flex-shrink:0;">
+    <div style="margin-bottom:16px;">
+      <img id="convInviteTeacherImg" src="" style="width:72px;height:72px;border-radius:50%;object-fit:cover;border:3px solid rgba(110,231,183,0.4);" />
     </div>
-    <div style="font-size:13px;color:var(--muted);margin-bottom:28px;line-height:1.6;">
-      AI 将围绕你刚学的单词，用剑桥口语考试风格<br>和你进行 5 道题的对话练习 🎯
+    <div style="font-size:18px;font-weight:700;margin-bottom:8px;letter-spacing:-0.01em;">口语对话练习</div>
+    <div style="font-size:13px;color:var(--muted);margin-bottom:6px;">
+      今日主题：<strong style="color:var(--accent)" id="convInviteTopic">英语对话</strong>
     </div>
-    <div style="display:flex;gap:12px;justify-content:center;">
-      <button onclick="skipConversation()" style="
-        padding:11px 24px;border-radius:10px;border:1px solid var(--border);
-        background:transparent;color:var(--muted);cursor:pointer;font-size:14px;
-        font-family:inherit;transition:all 0.2s;"
-        onmouseover="this.style.borderColor='var(--border2)';this.style.color='var(--text)'"
-        onmouseout="this.style.borderColor='var(--border)';this.style.color='var(--muted)'">
-        跳过
-      </button>
+    <div style="font-size:12px;color:var(--muted);margin-bottom:24px;line-height:1.7;">
+      剑桥口语考试风格 · 5 道对话练习<br>围绕今日单词展开
+    </div>
+    <div style="display:flex;flex-direction:column;gap:10px;">
       <button onclick="startConversation()" style="
-        padding:11px 28px;border-radius:10px;border:none;
+        width:100%;padding:12px;border-radius:10px;border:none;
         background:var(--accent);color:#0d1a14;cursor:pointer;
         font-size:14px;font-weight:700;font-family:inherit;
-        box-shadow:0 4px 20px rgba(110,231,183,0.3);transition:all 0.2s;"
+        box-shadow:0 4px 16px rgba(110,231,183,0.3);transition:all 0.2s;"
         onmouseover="this.style.transform='translateY(-1px)'"
         onmouseout="this.style.transform=''">
-        开始对话 ✨
+        开始对话
+      </button>
+      <button onclick="skipConversation()" style="
+        width:100%;padding:10px;border-radius:10px;border:1px solid var(--border);
+        background:transparent;color:var(--muted);cursor:pointer;font-size:13px;
+        font-family:inherit;transition:all 0.2s;"
+        onmouseover="this.style.color='var(--text)'"
+        onmouseout="this.style.color='var(--muted)'">
+        跳过，返回主页
       </button>
     </div>
   </div>
@@ -19729,14 +19738,12 @@ function maybeShowGalaxyRules() {
     <!-- Header -->
     <div style="padding:16px 20px;border-bottom:1px solid var(--border);
       display:flex;align-items:center;gap:12px;flex-shrink:0;">
-      <div style="width:36px;height:36px;border-radius:50%;
-        background:linear-gradient(135deg,var(--accent),var(--accent2));
-        display:flex;align-items:center;justify-content:center;font-size:18px;">🤖</div>
+      <img id="convModalTeacherImg" src="https://exoxpdobzomtygzngtsp.supabase.co/storage/v1/object/public/assets/AIteacher%20image.png"
+        style="width:38px;height:38px;border-radius:50%;object-fit:cover;flex-shrink:0;border:2px solid rgba(110,231,183,0.4);" />
       <div style="flex:1;">
-        <div style="font-size:14px;font-weight:700;">Sunny AI 口语练习</div>
+        <div style="font-size:14px;font-weight:700;" id="convModalTeacherName">口语练习</div>
         <div style="font-size:11px;color:var(--muted);">
           题 <span id="convProgressCur">0</span> / <span id="convProgressTotal">5</span>
-          &nbsp;·&nbsp; <span id="convInviteTopic2" style="color:var(--accent)"></span>
         </div>
       </div>
       <button onclick="closeConversation()" style="
@@ -19777,7 +19784,7 @@ function maybeShowGalaxyRules() {
         background:rgba(110,231,183,0.08);color:var(--accent);
         font-size:15px;font-weight:600;cursor:pointer;font-family:inherit;
         transition:all 0.2s;display:flex;align-items:center;justify-content:center;gap:8px;">
-        🎤 按住说话
+        🎤 点击说话，说完自动停止
       </button>
       <!-- Text fallback -->
       <div id="convTextFallback" style="display:none;margin-top:10px;gap:8px;">
@@ -19839,8 +19846,16 @@ function maybeShowGalaxyRules() {
     <button onclick="closeConvReport()" style="
       width:100%;padding:13px;border-radius:12px;border:none;
       background:var(--accent);color:#0d1a14;font-size:15px;
-      font-weight:700;cursor:pointer;font-family:inherit;">
+      font-weight:700;cursor:pointer;font-family:inherit;margin-bottom:10px;">
       完成 ✓
+    </button>
+    <button onclick="backToConversation()" style="
+      width:100%;padding:11px;border-radius:12px;border:1px solid var(--border);
+      background:transparent;color:var(--muted);font-size:13px;
+      cursor:pointer;font-family:inherit;transition:all 0.2s;"
+      onmouseover="this.style.color='var(--text)'"
+      onmouseout="this.style.color='var(--muted)'">
+      ← 返回对话记录
     </button>
   </div>
 </div>
@@ -19920,25 +19935,45 @@ let _convWordsToday = [];
 let _convWordsDue = [];
 let _convRecorder = null;
 let _convAudioChunks = [];
+let _convSpeechRecog = null;
 let _convIsRecording = false;
 let _convPronScores = [];
 let _convGrammarErrors = [];
 let _convSessionActive = false;
 
 // ── Entry point: called from showDone() after study session ──────────────────
-function maybeShowConversationInvite(bankKey, wordsStudiedToday, wordsDue) {
+function maybeShowConversationInvite(bankKey, wordsStudiedToday, wordsDue, inlineMode) {
     _convBankKey    = bankKey;
     _convWordsToday = wordsStudiedToday || [];
     _convWordsDue   = wordsDue || [];
     _convBankLevel  = detectBankLevel(bankKey);
 
+    const topic = detectTopic(_convWordsToday);
+    const topicEl = document.getElementById('convInviteTopic');
+    if (topicEl) topicEl.textContent = topic;
+
+    // Set teacher image based on selected voice
+    const teacherImgEl = document.getElementById('convInviteTeacherImg');
+    if (teacherImgEl) teacherImgEl.src = _getAITeacherImg();
+
     const overlay = document.getElementById('convInviteOverlay');
-    if (overlay) {
-        // Show topic preview
-        const topic = detectTopic(_convWordsToday);
-        const topicEl = document.getElementById('convInviteTopic');
-        if (topicEl) topicEl.textContent = topic;
-        overlay.style.display = 'flex';
+    if (!overlay) return;
+
+    if (inlineMode) {
+        overlay.style.cssText = 'display:flex;position:static;background:none;backdrop-filter:none;align-items:center;justify-content:center;z-index:auto;';
+        const doneScreen = document.getElementById('doneScreen');
+        if (doneScreen && overlay.parentNode !== doneScreen) {
+            doneScreen.appendChild(overlay);
+        }
+        overlay.style.opacity = '0';
+        overlay.style.transform = 'translateY(16px)';
+        overlay.style.transition = 'opacity 0.4s ease, transform 0.4s ease';
+        requestAnimationFrame(() => {
+            overlay.style.opacity = '1';
+            overlay.style.transform = 'translateY(0)';
+        });
+    } else {
+        overlay.style.cssText = 'display:flex;position:fixed;inset:0;z-index:600;background:rgba(10,12,18,0.85);backdrop-filter:blur(8px);align-items:center;justify-content:center;';
     }
 }
 
@@ -19967,7 +20002,26 @@ function detectTopic(words) {
 
 // ── Start the conversation session ──────────────────────────────────────────
 async function startConversation() {
-    document.getElementById('convInviteOverlay').style.display = 'none';
+    // Close done screen
+    const ds = document.getElementById('doneScreen');
+    if (ds) { ds.style.display = 'none'; ds.style.cssText = 'display:none;'; }
+    // Move invite overlay back to body and hide it
+    const overlay = document.getElementById('convInviteOverlay');
+    if (overlay) { overlay.style.display = 'none'; document.body.appendChild(overlay); }
+
+    // Set teacher image + name in modal header
+    const teacherImg = _getAITeacherImg();
+    const modalImg = document.getElementById('convModalTeacherImg');
+    if (modalImg) modalImg.src = teacherImg;
+    const isMale = teacherImg === AI_TEACHER_MALE;
+    const gbVoice = localStorage.getItem('sunny_voice_gb') || 'Kate (Enhanced)';
+    const usVoice = localStorage.getItem('sunny_voice_us') || 'Allison (Enhanced)';
+    const voiceName = isMale
+        ? (gbVoice.includes('Daniel') ? 'Daniel' : 'Evan')
+        : (gbVoice.includes('Kate') ? 'Kate' : 'Allison');
+    const nameEl = document.getElementById('convModalTeacherName');
+    if (nameEl) nameEl.textContent = voiceName + ' 老师 · 口语练习';
+
     const modal = document.getElementById('convModal');
     modal.style.display = 'flex';
 
@@ -20016,7 +20070,13 @@ async function startConversation() {
 }
 
 function skipConversation() {
-    document.getElementById('convInviteOverlay').style.display = 'none';
+    // Close done screen and go home
+    const ds = document.getElementById('doneScreen');
+    if (ds) { ds.style.display = 'none'; ds.style.cssText = 'display:none;'; }
+    // Move invite overlay back to body
+    const overlay = document.getElementById('convInviteOverlay');
+    if (overlay) { overlay.style.display = 'none'; document.body.appendChild(overlay); }
+    goHome();
 }
 
 function closeConversation() {
@@ -20033,14 +20093,55 @@ async function sendToAI(userText, pronunciationData) {
     // Show user message in chat
     appendUserMessage(userText, pronunciationData);
 
-    _convQuestionNum++;
-    updateConvProgress();
+    // Track pronunciation scores
+    if (pronunciationData && pronunciationData.stars > 0) {
+        _convPronScores.push(pronunciationData);
+    }
 
-    if (_convQuestionNum > _convTotalQuestions) {
-        // Session complete
+    // Check if answer is too short — needs follow-up, not a new question
+    const wordCount = userText.trim().split(/\s+/).length;
+    const isShortAnswer = wordCount <= 4;
+
+    // Find which today's words haven't appeared in conversation yet
+    const usedWords = _convWordsToday.filter(w =>
+        _convHistory.some(m => m.content.toLowerCase().includes(w.toLowerCase()))
+    );
+    const unusedWords = _convWordsToday.filter(w => !usedWords.includes(w)).slice(0, 4);
+
+    // Only increment question number if answer was substantial (not a follow-up)
+    if (!isShortAnswer) {
+        _convQuestionNum++;
+        updateConvProgress();
+    }
+
+    if (_convQuestionNum > _convTotalQuestions && !isShortAnswer) {
         setTimeout(() => {
             appendAIMessage('太棒了！🎉 今天的对话练习完成了！你表现得非常好！');
-            setTimeout(showConvReport, 1500);
+            // Show "查看报告" button in chat instead of auto-jumping
+            setTimeout(() => {
+                const chat = document.getElementById('convChatArea');
+                if (!chat) return;
+                const div = document.createElement('div');
+                div.style.cssText = 'text-align:center;padding:16px 0 4px;';
+                div.innerHTML = `<button onclick="showConvReport()" style="
+                    padding:10px 28px;border-radius:10px;border:none;
+                    background:var(--accent);color:#0d1a14;cursor:pointer;
+                    font-size:14px;font-weight:700;font-family:inherit;
+                    box-shadow:0 4px 16px rgba(110,231,183,0.3);transition:all 0.2s;"
+                    onmouseover="this.style.transform='translateY(-1px)'"
+                    onmouseout="this.style.transform=''">
+                    查看本轮报告 →
+                </button>`;
+                chat.appendChild(div);
+                chat.scrollTop = chat.scrollHeight;
+                // Also disable mic since session is done
+                disableMicButton();
+                const micBtn = document.getElementById('convMicBtn');
+                if (micBtn) {
+                    micBtn.style.opacity = '0.4';
+                    micBtn.style.pointerEvents = 'none';
+                }
+            }, 1200);
         }, 500);
         return;
     }
@@ -20049,6 +20150,20 @@ async function sendToAI(userText, pronunciationData) {
     disableMicButton();
 
     try {
+        // Pass pronunciation score to Claude so it can adjust tone
+        const pronNote = pronunciationData
+            ? `[Student pronunciation confidence: ${pronunciationData.stars}/5 stars. ${pronunciationData.stars <= 2 ? 'Gently encourage them to speak more clearly.' : 'Pronunciation was good.'}]`
+            : '';
+
+        // Follow-up instruction if answer was short
+        const followUpNote = isShortAnswer
+            ? `[Student gave a very short answer (${wordCount} words). Ask a follow-up question to get them to say more. Try to use one of these unused words in your follow-up: ${unusedWords.join(', ')}. Do NOT count this as a new question.]`
+            : unusedWords.length > 0
+            ? `[Try to naturally bring up one of these words the student hasn't used yet: ${unusedWords.join(', ')}]`
+            : '';
+
+        const augmentedMessage = [pronNote, followUpNote].filter(Boolean).join('\n') + (pronNote || followUpNote ? '\n\nStudent said: ' : '') + userText;
+
         const res = await fetch(`${SUNNY_BACKEND_URL}/api/chat`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
@@ -20057,9 +20172,10 @@ async function sendToAI(userText, pronunciationData) {
                 bank_level: _convBankLevel,
                 words_studied_today: _convWordsToday,
                 words_due_review: _convWordsDue,
-                conversation_history: _convHistory.slice(-10), // last 10 turns
-                user_message: userText,
-                question_number: _convQuestionNum
+                conversation_history: _convHistory.slice(-10),
+                user_message: augmentedMessage,
+                question_number: _convQuestionNum,
+                is_followup: isShortAnswer
             })
         });
         const data = await res.json();
@@ -20075,129 +20191,151 @@ async function sendToAI(userText, pronunciationData) {
 
     } catch (e) {
         showConvThinking(false);
-        appendAIMessage('很好！继续说吧～ That\'s great! Can you tell me more?');
+        appendAIMessage('很好！Can you tell me more about that?');
         enableMicButton();
     }
 }
 
 // ── Voice recording ──────────────────────────────────────────────────────────
+// ── Voice recording — Web Speech API as PRIMARY ──────────────────────────────
+// No Azure for pronunciation. Web Speech API gives us text + confidence score.
+// Confidence → star rating. Stars passed to Claude to adjust response tone.
+
 async function startRecording() {
-    if (_convIsRecording) { stopRecording(); return; }
-
-    try {
-        const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
-        _convAudioChunks = [];
-        _convRecorder = new MediaRecorder(stream, { mimeType: 'audio/webm' });
-
-        _convRecorder.ondataavailable = (e) => {
-            if (e.data.size > 0) _convAudioChunks.push(e.data);
-        };
-
-        _convRecorder.onstop = async () => {
-            stream.getTracks().forEach(t => t.stop());
-            const audioBlob = new Blob(_convAudioChunks, { type: 'audio/webm' });
-            await processAudio(audioBlob);
-        };
-
-        _convRecorder.start();
-        _convIsRecording = true;
-        updateMicUI(true);
-
-    } catch (e) {
-        // Fallback: use Web Speech API for text only (no pronunciation scoring)
-        useSpeechRecognitionFallback();
+    if (_convIsRecording) {
+        // Already listening — stop it
+        if (_convSpeechRecog) { _convSpeechRecog.stop(); }
+        _convIsRecording = false;
+        updateMicUI(false);
+        return;
     }
+
+    const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+    if (!SpeechRecognition) {
+        showTextInput();
+        return;
+    }
+
+    _convSpeechRecog = new SpeechRecognition();
+    _convSpeechRecog.lang = 'en-US';
+    _convSpeechRecog.continuous = true;       // keep listening until silence
+    _convSpeechRecog.interimResults = true;
+    _convSpeechRecog.maxAlternatives = 1;
+
+    _convIsRecording = true;
+    updateMicUI(true);
+
+    // Show live transcript while speaking
+    let interimDiv = document.getElementById('convInterimText');
+    if (!interimDiv) {
+        interimDiv = document.createElement('div');
+        interimDiv.id = 'convInterimText';
+        interimDiv.style.cssText = 'text-align:center;font-size:13px;color:var(--muted);padding:6px 16px;font-style:italic;min-height:20px;';
+        const micBtn = document.getElementById('convMicBtn');
+        if (micBtn) micBtn.parentNode.insertBefore(interimDiv, micBtn.nextSibling);
+    }
+
+    let _finalText = '';
+    let _lastConf = 0;
+    let _silenceTimer = null;
+
+    // After 2s of silence, submit automatically
+    function _resetSilenceTimer() {
+        if (_silenceTimer) clearTimeout(_silenceTimer);
+        _silenceTimer = setTimeout(() => {
+            if (_finalText.trim().length > 0 && _convIsRecording) {
+                _convSpeechRecog.stop();
+            }
+        }, 2000);
+    }
+
+    _convSpeechRecog.onresult = (e) => {
+        let interim = '';
+        let newFinal = '';
+
+        for (let i = e.resultIndex; i < e.results.length; i++) {
+            if (e.results[i].isFinal) {
+                newFinal += e.results[i][0].transcript;
+                _lastConf = e.results[i][0].confidence;
+            } else {
+                interim += e.results[i][0].transcript;
+            }
+        }
+
+        if (newFinal) {
+            _finalText += ' ' + newFinal;
+            _finalText = _finalText.trim();
+        }
+
+        // Show live text
+        if (interimDiv) {
+            interimDiv.textContent = _finalText + (interim ? ' ' + interim : '');
+        }
+
+        // Reset silence timer whenever we get new speech
+        if (interim || newFinal) _resetSilenceTimer();
+    };
+
+    _convSpeechRecog.onend = async () => {
+        if (_silenceTimer) clearTimeout(_silenceTimer);
+        _convIsRecording = false;
+        updateMicUI(false);
+        if (interimDiv) interimDiv.textContent = '';
+
+        const text = _finalText.trim();
+        if (!text) {
+            // Nothing captured — re-enable mic
+            enableMicButton();
+            appendSystemMessage('没有听清楚，请再试一次 🎤');
+            return;
+        }
+
+        // Confidence → stars (Safari returns 0, treat as 0.85)
+        const conf = _lastConf > 0 ? _lastConf : 0.85;
+        const stars = conf >= 0.95 ? 5 : conf >= 0.85 ? 4 : conf >= 0.75 ? 3 : conf >= 0.60 ? 2 : 1;
+
+        const pronData = {
+            recognized_text: text,
+            accuracy_score: Math.round(conf * 100),
+            stars: stars,
+            confidence: conf,
+            word_scores: [],
+            success: true,
+            method: 'webspeech'
+        };
+
+        await sendToAI(text, pronData);
+    };
+
+    _convSpeechRecog.onerror = (e) => {
+        if (_silenceTimer) clearTimeout(_silenceTimer);
+        _convIsRecording = false;
+        updateMicUI(false);
+        if (interimDiv) interimDiv.textContent = '';
+        if (e.error === 'no-speech') {
+            appendSystemMessage('没有听到声音，请点击麦克风再试一次 🎤');
+            enableMicButton();
+        } else if (e.error === 'not-allowed') {
+            appendSystemMessage('请允许麦克风权限后重试');
+            enableMicButton();
+        } else {
+            enableMicButton();
+        }
+    };
+
+    _convSpeechRecog.start();
 }
 
 function stopRecording() {
-    if (_convRecorder && _convIsRecording) {
-        _convRecorder.stop();
+    if (_convSpeechRecog && _convIsRecording) {
+        _convSpeechRecog.stop();
         _convIsRecording = false;
         updateMicUI(false);
     }
 }
 
-async function processAudio(audioBlob) {
-    showConvThinking(true);
-    disableMicButton();
-
-    // Step 1: Get text from speech (Web Speech API for speed, we already have the blob)
-    // We use Web Speech API in parallel for immediate text display
-    // Step 2: Send to backend for pronunciation assessment
-
-    try {
-        // Convert blob to WAV for Azure
-        const formData = new FormData();
-        formData.append('audio', audioBlob, 'recording.webm');
-        // Get the last AI message as reference text for pronunciation
-        const lastAI = _convHistory.filter(m => m.role === 'assistant').slice(-1)[0];
-        const refWords = extractKeyWords(lastAI?.content || '');
-        formData.append('reference_text', refWords);
-
-        const res = await fetch(`${SUNNY_BACKEND_URL}/api/assess-pronunciation`, {
-            method: 'POST',
-            body: formData
-        });
-        const pronData = await res.json();
-        showConvThinking(false);
-
-        if (pronData.success && pronData.recognized_text) {
-            if (pronData.stars > 0) _convPronScores.push(pronData);
-            await sendToAI(pronData.recognized_text, pronData);
-        } else {
-            // Fallback to Web Speech
-            useSpeechRecognitionFallback();
-        }
-
-    } catch (e) {
-        showConvThinking(false);
-        useSpeechRecognitionFallback();
-    }
-}
-
 function extractKeyWords(text) {
-    // Extract simple words from AI question for pronunciation reference
     return text.replace(/[^a-zA-Z\s]/g, '').trim().split(/\s+/).slice(0, 10).join(' ');
-}
-
-function useSpeechRecognitionFallback() {
-    const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
-    if (!SpeechRecognition) {
-        enableMicButton();
-        appendSystemMessage('请输入你的回答（此设备不支持语音识别）');
-        showTextInput();
-        return;
-    }
-
-    const recog = new SpeechRecognition();
-    recog.lang = 'en-US';
-    recog.continuous = false;
-    recog.interimResults = false;
-
-    recog.onstart = () => updateMicUI(true);
-    recog.onend   = () => updateMicUI(false);
-
-    recog.onresult = async (e) => {
-        const text = e.results[0][0].transcript;
-        const confidence = e.results[0][0].confidence;
-        // Use confidence as rough pronunciation indicator
-        const fakePron = {
-            recognized_text: text,
-            accuracy_score: Math.round(confidence * 100),
-            stars: confidence >= 0.9 ? 5 : confidence >= 0.8 ? 4 : confidence >= 0.7 ? 3 : 2,
-            word_scores: [],
-            success: true,
-            fallback: true
-        };
-        await sendToAI(text, fakePron);
-    };
-
-    recog.onerror = () => {
-        enableMicButton();
-        showTextInput();
-    };
-
-    recog.start();
 }
 
 // ── Text input fallback ──────────────────────────────────────────────────────
@@ -20216,24 +20354,137 @@ async function submitTextAnswer() {
 }
 
 // ── UI helpers ───────────────────────────────────────────────────────────────
-function appendAIMessage(text) {
+// ── AI Teacher images — male/female based on selected voice ───────────────────
+const AI_TEACHER_FEMALE = 'https://exoxpdobzomtygzngtsp.supabase.co/storage/v1/object/public/assets/AIteacher%20image.png';
+const AI_TEACHER_MALE   = 'https://exoxpdobzomtygzngtsp.supabase.co/storage/v1/object/public/assets/Aiteacher%20man.png';
+
+// Preload both teacher images immediately
+(function() {
+    [AI_TEACHER_FEMALE, AI_TEACHER_MALE].forEach(function(url) {
+        var img = new Image(); img.src = url;
+    });
+})();
+
+function _getAITeacherImg() {
+    // Kate / Allison = female teacher; Daniel / Evan = male teacher
+    var voiceId = localStorage.getItem('sunny_voice_selected') || '';
+    var gbVoice = localStorage.getItem('sunny_voice_gb') || 'Kate (Enhanced)';
+    var usVoice = localStorage.getItem('sunny_voice_us') || 'Allison (Enhanced)';
+    // Determine active voice (use GB as primary if set)
+    var activeVoice = gbVoice + usVoice;
+    var isMale = activeVoice.toLowerCase().includes('daniel') || activeVoice.toLowerCase().includes('evan');
+    return isMale ? AI_TEACHER_MALE : AI_TEACHER_FEMALE;
+}
+
+function _getUserAvatarImg() {
+    // Get user's selected avatar (half-size for chat)
+    try {
+        var saved = JSON.parse(localStorage.getItem('sunnyAvatar_v1'));
+        if (saved && (saved.halfUrl || saved.customUrl)) {
+            return saved.customUrl || saved.halfUrl;
+        }
+    } catch(e) {}
+    return null;
+}
+
+// ── TTS helper — uses user's selected voice (Kate/Daniel/Allison/Evan) ────────
+function _convSpeak(text) {
+    if (!('speechSynthesis' in window)) return;
+    // Strip Chinese characters and emoji, keep only English
+    const english = text
+        .replace(/[\u4e00-\u9fff\u3000-\u303f\uff00-\uffef]/g, '')
+        .replace(/[💡⭐☆🎤🔊🤖👤🎉✨🌊🌋🌿💎🍰🌌🐘]/gu, '')
+        .replace(/\*\*/g, '')
+        .replace(/\s+/g, ' ').trim();
+    if (!english || english.length < 2) return;
+
+    window.speechSynthesis.cancel();
+    const utter = new SpeechSynthesisUtterance(english);
+    utter.rate = 0.88;
+    utter.pitch = 1.0;
+
+    // Use the voice the user selected in the voice picker
+    const voices = window.speechSynthesis.getVoices();
+    const gbPref = localStorage.getItem('sunny_voice_gb') || 'Kate (Enhanced)';
+    const usPref = localStorage.getItem('sunny_voice_us') || 'Allison (Enhanced)';
+
+    // Try GB voice first, then US, then any English
+    const voice = voices.find(v => v.name === gbPref)
+        || voices.find(v => v.name === usPref)
+        || voices.find(v => v.name.includes('Kate') || v.name.includes('Allison'))
+        || voices.find(v => v.lang.startsWith('en') && v.localService)
+        || voices.find(v => v.lang.startsWith('en'));
+
+    if (voice) {
+        utter.voice = voice;
+        utter.lang = voice.lang;
+    } else {
+        utter.lang = 'en-GB';
+    }
+
+    window.speechSynthesis.speak(utter);
+}
+
+function _convSpeakBtn(text) {
+    const cleanText = (text || '').replace(/\\/g, '\\\\').replace(/'/g, "\\'").replace(/"/g, '&quot;');
+    return `<button onclick="_convSpeak('${cleanText}')" style="
+        background:none;border:1px solid rgba(255,255,255,0.12);border-radius:6px;
+        padding:2px 8px;font-size:11px;color:var(--muted);cursor:pointer;
+        margin-left:6px;vertical-align:middle;transition:all 0.15s;display:inline-flex;
+        align-items:center;"
+        onmouseover="this.style.borderColor='var(--accent)';this.style.color='var(--accent)'"
+        onmouseout="this.style.borderColor='rgba(255,255,255,0.12)';this.style.color='var(--muted)'">
+        🔊
+    </button>`;
+}
+
+function appendAIMessage(text, autoSpeak) {
     const chat = document.getElementById('convChatArea');
     if (!chat) return;
     const div = document.createElement('div');
     div.className = 'conv-msg conv-msg-ai';
-    // Split correction from main text for styling
+
+    const teacherImg = _getAITeacherImg();
+    const avatarHtml = `<img src="${teacherImg}" style="width:36px;height:36px;border-radius:50%;object-fit:cover;flex-shrink:0;border:2px solid rgba(110,231,183,0.3);" onerror="this.outerHTML='<div class=conv-avatar>🤖</div>'" />`;
+
     const parts = text.split('\n').filter(l => l.trim());
+    let mainText = '';
     let html = '';
+
     parts.forEach(p => {
         if (p.startsWith('💡')) {
-            html += `<div class="conv-correction">${p}</div>`;
+            const corrected = (p.match(/→\s*['"]?([^'"(,\n]+)['"]?/) || [])[1] || '';
+            const speakBtn = corrected.trim() ? _convSpeakBtn(corrected.trim()) : '';
+            html += `<div class="conv-correction">${p}${speakBtn}</div>`;
         } else {
-            html += `<p>${p}</p>`;
+            // Remove markdown bold **text**
+            const clean = p.replace(/\*\*([^*]+)\*\*/g, '$1');
+            mainText += ' ' + clean;
+            html += `<p>${clean}</p>`;
         }
     });
-    div.innerHTML = `<div class="conv-avatar">🤖</div><div class="conv-bubble">${html}</div>`;
+
+    const replayBtn = _convSpeakBtn(mainText.trim());
+    div.innerHTML = `
+        ${avatarHtml}
+        <div class="conv-bubble">
+            ${html}
+            <div style="margin-top:6px;text-align:right;">${replayBtn}</div>
+        </div>`;
     chat.appendChild(div);
     chat.scrollTop = chat.scrollHeight;
+
+    if (autoSpeak !== false) {
+        // Wait for voices to load if needed
+        if (window.speechSynthesis.getVoices().length === 0) {
+            window.speechSynthesis.onvoiceschanged = () => {
+                setTimeout(() => _convSpeak(mainText.trim()), 100);
+                window.speechSynthesis.onvoiceschanged = null;
+            };
+        } else {
+            setTimeout(() => _convSpeak(mainText.trim()), 300);
+        }
+    }
 }
 
 function appendUserMessage(text, pronData) {
@@ -20242,23 +20493,24 @@ function appendUserMessage(text, pronData) {
     const div = document.createElement('div');
     div.className = 'conv-msg conv-msg-user';
 
+    // Use user's selected avatar, fallback to generic person icon
+    const userImgUrl = _getUserAvatarImg();
+    const userAvatarHtml = userImgUrl
+        ? `<img src="${userImgUrl}" style="width:36px;height:36px;border-radius:50%;object-fit:cover;flex-shrink:0;border:2px solid rgba(167,139,250,0.3);" onerror="this.outerHTML='<div class=conv-avatar style=background:rgba(167,139,250,0.15)>👤</div>'" />`
+        : `<div class="conv-avatar conv-avatar-user">👤</div>`;
+
     let pronHtml = '';
     if (pronData && pronData.stars > 0) {
         const stars = '⭐'.repeat(pronData.stars) + '☆'.repeat(5 - pronData.stars);
-        const label = pronData.fallback ? '识别' : '发音';
-        pronHtml = `<div class="conv-pron-badge">${label} ${stars}</div>`;
-        if (pronData.word_scores && pronData.word_scores.length > 0) {
-            const badWords = pronData.word_scores.filter(w => w.accuracy_score < 70);
-            if (badWords.length > 0) {
-                const wordList = badWords.map(w =>
-                    `<span class="conv-word-score">${w.word} (${w.accuracy_score}分)</span>`
-                ).join(' ');
-                pronHtml += `<div class="conv-word-feedback">注意发音：${wordList}</div>`;
-            }
-        }
+        pronHtml = `<div class="conv-pron-badge">发音 ${stars}</div>`;
     }
 
-    div.innerHTML = `<div class="conv-bubble-user"><p>${text}</p>${pronHtml}</div><div class="conv-avatar conv-avatar-user">👤</div>`;
+    div.innerHTML = `
+        <div class="conv-bubble-user">
+            <p>${text}</p>
+            ${pronHtml}
+        </div>
+        ${userAvatarHtml}`;
     chat.appendChild(div);
     chat.scrollTop = chat.scrollHeight;
 }
@@ -20282,8 +20534,8 @@ function updateMicUI(recording) {
     if (!btn) return;
     btn.classList.toggle('conv-mic-active', recording);
     btn.innerHTML = recording
-        ? '<span style="animation:pulse 1s infinite">🔴</span> 录音中…点击停止'
-        : '🎤 按住说话';
+        ? '<span style="animation:pulse 1s infinite">🔴</span> 正在听… 说完会自动识别'
+        : '🎤 点击说话，说完自动停止';
 }
 
 function enableMicButton() {
@@ -20344,6 +20596,17 @@ function showConvReport() {
 function closeConvReport() {
     const report = document.getElementById('convReportOverlay');
     if (report) report.style.display = 'none';
+}
+
+function backToConversation() {
+    // Hide report, show conversation modal again (read-only — mic disabled)
+    const report = document.getElementById('convReportOverlay');
+    if (report) report.style.display = 'none';
+    const modal = document.getElementById('convModal');
+    if (modal) modal.style.display = 'flex';
+    // Scroll to bottom of chat
+    const chat = document.getElementById('convChatArea');
+    if (chat) chat.scrollTop = chat.scrollHeight;
 }
 
 </script>
